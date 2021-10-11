@@ -1,13 +1,13 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 // Represents an agenda of homework
 
 public class HomeworkAgenda {
-
-    List<Homework> agenda;
+    ArrayList<Homework> agenda;
 
     //EFFECT: Constructs an empty agenda
     public HomeworkAgenda() {
@@ -34,6 +34,11 @@ public class HomeworkAgenda {
     //EFFECTS: get the Homework at index x in list
     public Homework get(int x) {
         return agenda.get(x);
+    }
+
+    // EFFECTS: returns subject
+    public List<Homework> getAgenda() {
+        return agenda;
     }
 
 
