@@ -11,12 +11,12 @@ public class Homework {
         this.description = description;
     }
 
-    // EFFECTS: returns subject
+    // EFFECTS: returns subject of homework
     public String getSubject() {
         return subject;
     }
 
-    // EFFECTS: returns true if case is closed, false otherwise
+    // EFFECTS: returns description of homework
     public String getDescription() {
         return description;
     }

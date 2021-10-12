@@ -15,6 +15,29 @@ class HomeworkAgendaTest {
     }
 
     @Test
+    public void testGetter1() {
+        Homework homework = new Homework("math", "webwork");
+
+        hwAgenda.addHomework(homework);
+
+        assertEquals("math", (hwAgenda.get(0)).getSubject());
+    }
+
+    @Test
+    public void testGetter2() {
+        Homework homework = new Homework("math", "webwork");
+
+        hwAgenda.addHomework(homework);
+
+        assertEquals("webwork", (hwAgenda.get(0)).getDescription());
+    }
+
+    @Test
+    public void testConstructor() {
+        assertEquals(0, hwAgenda.length());
+    }
+
+    @Test
     public void testAddHomeworkToEmtpyAgenda() {
         Homework homework = new Homework("math", "webwork");
 
