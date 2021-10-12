@@ -37,7 +37,7 @@ public class HomeworkAgenda {
         return agenda.get(x);
     }
 
-    // EFFECTS: returns subject
+    // EFFECTS: returns agenda
     public List<Homework> getAgenda() {
         return agenda;
     }

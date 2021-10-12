@@ -14,23 +14,6 @@ class HomeworkAgendaTest {
          hwAgenda = new HomeworkAgenda();
     }
 
-    @Test
-    public void testGetter1() {
-        Homework homework = new Homework("math", "webwork");
-
-        hwAgenda.addHomework(homework);
-
-        assertEquals("math", (hwAgenda.get(0)).getSubject());
-    }
-
-    @Test
-    public void testGetter2() {
-        Homework homework = new Homework("math", "webwork");
-
-        hwAgenda.addHomework(homework);
-
-        assertEquals("webwork", (hwAgenda.get(0)).getDescription());
-    }
 
     @Test
     public void testConstructor() {
@@ -52,9 +35,9 @@ class HomeworkAgendaTest {
 
     @Test
     public void testLength() {
-        Homework homework = new Homework("math", "webwork");
-        Homework homework1 = new Homework("science", "webwork");
-        Homework homework2 = new Homework("history", "webwork");
+        Homework homework = new Homework("math", "webwork1");
+        Homework homework1 = new Homework("science", "webwork2");
+        Homework homework2 = new Homework("history", "webwork3");
         hwAgenda.addHomework(homework);
         hwAgenda.addHomework(homework1);
         hwAgenda.addHomework(homework2);
@@ -65,9 +48,9 @@ class HomeworkAgendaTest {
 
     @Test
     public void testGet() {
-        Homework homework = new Homework("math", "webwork");
-        Homework homework1 = new Homework("science", "webwork");
-        Homework homework2 = new Homework("history", "webwork");
+        Homework homework = new Homework("math", "webwork1");
+        Homework homework1 = new Homework("science", "webwork2");
+        Homework homework2 = new Homework("history", "webwork3");
         hwAgenda.addHomework(homework);
         hwAgenda.addHomework(homework1);
         hwAgenda.addHomework(homework2);
@@ -81,18 +64,26 @@ class HomeworkAgendaTest {
 
     @Test
     public void testGetAgenda() {
-        Homework homework = new Homework("math", "webwork");
-        Homework homework1 = new Homework("science", "webwork");
-        Homework homework2 = new Homework("history", "webwork");
+        Homework homework = new Homework("math", "webwork1");
+        Homework homework1 = new Homework("science", "webwork2");
+        Homework homework2 = new Homework("history", "webwork3");
         hwAgenda.addHomework(homework);
         hwAgenda.addHomework(homework1);
         hwAgenda.addHomework(homework2);
 
         String subject = hwAgenda.getAgenda().get(0).getSubject();
         String subject2 = hwAgenda.getAgenda().get(1).getSubject();
+        String subject3 = hwAgenda.getAgenda().get(2).getSubject();
+        String description = hwAgenda.getAgenda().get(0).getDescription();
+        String description2 = hwAgenda.getAgenda().get(1).getDescription();
+        String description3 = hwAgenda.getAgenda().get(2).getDescription();
 
         assertEquals("math", subject);
         assertEquals("science", subject2);
+        assertEquals("webwork1", description);
+        assertEquals("webwork2", description2);
+        assertEquals("history", subject3);
+        assertEquals("webwork3", description3);
     }
 
     @Test
@@ -106,9 +97,9 @@ class HomeworkAgendaTest {
 
     @Test
     public void testDeleteHomeworkFromLargeAgenda() {
-        Homework homework = new Homework("math", "webwork");
-        Homework homework1 = new Homework("science", "webwork");
-        Homework homework2 = new Homework("history", "webwork");
+        Homework homework = new Homework("math", "webwork1");
+        Homework homework1 = new Homework("science", "webwork2");
+        Homework homework2 = new Homework("history", "webwork3");
         hwAgenda.addHomework(homework);
         hwAgenda.addHomework(homework1);
         hwAgenda.addHomework(homework2);
