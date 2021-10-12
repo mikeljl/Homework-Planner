@@ -3,7 +3,6 @@ package model;
 // Represents a Homework having a subject, due date, and a description
 public class Homework {
     private String subject;
-    private String dueDate;
     private String description;
 
     // EFFECTS: homework has given subject, due date and description

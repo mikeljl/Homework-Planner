@@ -23,6 +23,7 @@ public class HomeworkAgenda {
     //MODIFIES: this
     //EFFECTS: remove the given homework from agenda
     public void deleteHomework(Homework hw) {
+        //agenda.remove(num);
         agenda.remove(hw);
     }
 
