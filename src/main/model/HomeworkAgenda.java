@@ -23,8 +23,22 @@ public class HomeworkAgenda {
     //MODIFIES: this
     //EFFECTS: remove the given homework from agenda
     public void deleteHomework(Homework hw) {
-        //agenda.remove(num);
         agenda.remove(hw);
+    }
+
+    public void deleteHomeworkWithSubject(String subject) {
+
+        ArrayList<Homework> needToBeDeleted;
+
+        needToBeDeleted = new ArrayList<>();
+
+        for (Homework next : this.agenda) {
+            if (next.getSubject() == subject) {
+                needToBeDeleted.add(next);
+            }
+        }
+
+        agenda.removeAll(needToBeDeleted);
     }
 
     //EFFECTS: returns the number of Homework currently in agenda
