@@ -1,4 +1,3 @@
-
 package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,12 +16,12 @@ public class HomeworkTest {
     }
 
     @Test
-    private void testGetSubject() {
+    public void testGetSubject() {
         assertEquals("aa", homework.getSubject());
     }
 
     @Test
-    private void testGetDescription() {
+    public void testGetDescription() {
         assertEquals("bb", homework.getDescription());
     }
 
