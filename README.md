@@ -4,13 +4,13 @@ I will be creating a **homework agenda** for this project.
 
 **Features of the homework agenda:**
 - Students can include 
-  the description of their homework as well as the due date and the subject of the homework in this homework agenda
+  the description of their homework and the subject of the homework in this homework agenda
 - Once the students have completed the homework, the student will be able to remove the homework from the agenda.
-- The student can enter a date and then the agenda will be able to display what homework is due on 
-  that day 
-- The student can also enter a subject and then the agenda will be able to display what homework there is in the agenda 
+- The student can enter a subject and then the agenda will be able to display what homework there is in the agenda 
   from that subject
-  Students in elementary school, high school and university can use this agenda. 
+- The student can delete all the homework with a specific subject
+- The student can view all homework
+- The student can see thte total number of homework
   
 Students from elementary school and high school can use this agenda to keep track of their homework.
 
@@ -28,3 +28,4 @@ design a homework agenda that will be easy and convenient to use.
 - As a user, I want to be able to delete a homework from my agenda
 - As a user, I want to be able to see the total number of homework from my agenda
 - As a user, I want to be able to see the homework for a given subject
+- As a user, I want to be able to delete all the homework with a given subject

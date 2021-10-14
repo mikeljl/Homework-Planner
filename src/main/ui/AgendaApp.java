@@ -53,6 +53,8 @@ public class AgendaApp {
             doShowTotalNumberOfHomework();
         } else if (command.equals("given subject")) {
             showHomeworkWithGivenSubject();
+        } else if (command.equals("delete given subject")) {
+            deleteHomeworkWithGivenSubject();
         } else {
             System.out.println("Selection Not Valid!");
         }
@@ -75,21 +77,34 @@ public class AgendaApp {
         System.out.println("\tshow all -> Show All Homework");
         System.out.println("\ttotal number -> Total Number Of Homework");
         System.out.println("\tgiven subject -> See Homework With Given Subject");
+        System.out.println("\tdelete given subject -> Delete All Homework From Given Subject");
         System.out.println("\tq -> quit");
+    }
+
+    // REQUIRES: HomeworkAgenda must already have a homework with the subject entered in
+    // MODIFIES: this
+    // EFFECTS: conducts delete homework with subject
+    private void deleteHomeworkWithGivenSubject() {
+
+        System.out.print("Please enter the subject of homework that you want to delete : \n");
+        String subjectToDelete = input.next();
+        subjectToDelete = subjectToDelete.toLowerCase();
+
+        homeworkAgenda.deleteHomeworkWithSubject(subjectToDelete);
+
+        System.out.print("All " + subjectToDelete + "'s" + " homework has been successfully deleted");
     }
 
     // MODIFIES: this
     // EFFECTS: conducts add homework
     private void doAddHomework() {
-        String subject = null;
-        String description = null;
 
         System.out.print("Please enter the subject of the homework: \t");
-        subject = input.next();
+        String subject = input.next();
         subject = subject.toLowerCase();
 
         System.out.print("Please enter the description of the homework: \t");
-        description = input.next();
+        String description = input.next();
         description = description.toLowerCase();
 
         Homework newHomework = new Homework(subject, description);
@@ -102,29 +117,6 @@ public class AgendaApp {
     // MODIFIES: this
     // EFFECTS: conducts delete homework
     private void doDeleteHomework() {
-        //String userInputOfSubject = null;
-        //String userInputOfDescription = null;
-
-        //System.out.print("Enter the subject of homework you want to delete: \n");
-        //userInputOfSubject = input.next();
-        //userInputOfSubject = userInputOfSubject.toLowerCase();
-
-
-       // for (Homework next : homeworkAgenda.getAgenda()) {
-       //     if (next.getSubject().equals(userInputOfSubject)) {
-      //          System.out.println("Subject: " + next.getSubject() + "  Description: " + next.getDescription()
-       //                  + " or\n");
-       //       }
-      //    }
-
-        //for (Homework next : homeworkAgenda.getAgenda()) {
-        //     if ((next.getDescription().equals(userInputOfDescription))) {
-        //        homeworkAgenda.deleteHomework(next);
-        //   }
-        // }
-
-        // System.out.println("Subject: " + userInputOfSubject + "  Description: " + userInputOfDescription
-        //         + " has been successfully deleted");
 
         for (int i = 0; i < homeworkAgenda.length(); i++) {
             System.out.println((i + 1) + ". " + "Subject: " + homeworkAgenda.getAgenda().get(i).getSubject()
@@ -146,7 +138,7 @@ public class AgendaApp {
         Homework delete = homeworkAgenda.getAgenda().get(i - 1);
         homeworkAgenda.deleteHomework(delete);
 
-        System.out.println("Subject: " + delete.getSubject() + "Description: " + delete.getDescription()
+        System.out.println("Subject: " + delete.getSubject() + " Description: " + delete.getDescription()
                 + " has been deleted!");
     }
 
@@ -167,22 +159,23 @@ public class AgendaApp {
 
     }
 
-    // EFFECTS: show all homework in agends that have a given subject
+    //REQUIRES: HomeworkAgenda must already have a homework with subject entered in
+    // EFFECTS: show all homework in agenda that has a given subject
     private void showHomeworkWithGivenSubject() {
         System.out.println("What subject's homework do you want to see? \t");
         String userInputOfSubject = input.next();
+        userInputOfSubject = userInputOfSubject.toLowerCase();
 
         if (homeworkAgenda.length() == 0) {
             System.out.println("Agenda is EMPTY!!!");
         } else {
             for (Homework next : homeworkAgenda.getAgenda()) {
                 if (next.getSubject().equals(userInputOfSubject)) {
-                    System.out.println(userInputOfSubject + " " + next.getDescription());
+                    System.out.println("Subject " + userInputOfSubject + " " + "Description " + next.getDescription());
                 }
             }
         }
     }
-
 }
 
 

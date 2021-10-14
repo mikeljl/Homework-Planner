@@ -20,25 +20,27 @@ public class HomeworkAgenda {
         agenda.add(hw);
     }
 
+    //REQUIRES: Homework hw is already in HomeworkAgenda
     //MODIFIES: this
     //EFFECTS: remove the given homework from agenda
     public void deleteHomework(Homework hw) {
         agenda.remove(hw);
     }
 
+    //REQUIRES: HomeworkAgenda must have a homework with subject
+    //MODIFIES: this
+    //EFFECT: delete all homework with subject
     public void deleteHomeworkWithSubject(String subject) {
 
-        ArrayList<Homework> needToBeDeleted;
-
-        needToBeDeleted = new ArrayList<>();
+        HomeworkAgenda needToBeDeleted = new HomeworkAgenda();
 
         for (Homework next : this.agenda) {
-            if (next.getSubject() == subject) {
-                needToBeDeleted.add(next);
+            if (next.getSubject().equals(subject)) {
+                needToBeDeleted.addHomework(next);
             }
         }
 
-        agenda.removeAll(needToBeDeleted);
+        agenda.removeAll(needToBeDeleted.agenda);
     }
 
     //EFFECTS: returns the number of Homework currently in agenda
