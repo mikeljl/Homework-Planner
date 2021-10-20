@@ -4,16 +4,25 @@ package ui;
 
 import model.Homework;
 import model.HomeworkAgenda;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class AgendaApp {
 
     private Scanner input;
+    private static final String JSON_STORE = "./data/homeworkagenda.json";
     private HomeworkAgenda homeworkAgenda;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the agenda application
-    public AgendaApp() {
+    public AgendaApp() throws FileNotFoundException {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runAgenda();
     }
 
@@ -30,7 +39,7 @@ public class AgendaApp {
             command = input.next();
             command = command.toLowerCase();
 
-            if (command.equals("quit")) {
+            if (command.equals("q")) {
                 keepGoing = false;
             } else {
                 processCommand(command);
@@ -55,6 +64,10 @@ public class AgendaApp {
             showHomeworkWithGivenSubject();
         } else if (command.equals("delete given subject")) {
             deleteHomeworkWithGivenSubject();
+        } else if (command.equals("s")) {
+            saveHomeworkAgenda();
+        } else if (command.equals("l")) {
+            loadHomeworkAgenda();
         } else {
             System.out.println("Selection Not Valid!");
         }
@@ -78,7 +91,9 @@ public class AgendaApp {
         System.out.println("\ttotal number -> Total Number Of Homework");
         System.out.println("\tgiven subject -> See Homework With Given Subject");
         System.out.println("\tdelete given subject -> Delete All Homework From Given Subject");
-        System.out.println("\tq -> quit");
+        System.out.println("\ts -> Save Homework Agenda To File");
+        System.out.println("\tl -> Load Work Room From File");
+        System.out.println("\tq -> Quit");
     }
 
     // REQUIRES: HomeworkAgenda must already have a homework with the subject entered in
@@ -174,6 +189,29 @@ public class AgendaApp {
                     System.out.println("Subject " + userInputOfSubject + " " + "Description " + next.getDescription());
                 }
             }
+        }
+    }
+
+    // EFFECTS: saves the workroom to file
+    private void saveHomeworkAgenda() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(homeworkAgenda);
+            jsonWriter.close();
+            System.out.println("Saved " + "your homework agenda" + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadHomeworkAgenda() {
+        try {
+            homeworkAgenda = jsonReader.read();
+            System.out.println("Loaded " + "your homework agenda" + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 }

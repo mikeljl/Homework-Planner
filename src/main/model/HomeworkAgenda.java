@@ -1,12 +1,16 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 // Represents an agenda of homework
 
-public class HomeworkAgenda {
+public class HomeworkAgenda implements Writable {
     ArrayList<Homework> agenda;
 
     //EFFECT: Constructs an empty agenda
@@ -58,8 +62,23 @@ public class HomeworkAgenda {
         return agenda;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("agenda", agendaToJson());
+        return json;
+    }
 
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray agendaToJson() {
+        JSONArray jsonArray = new JSONArray();
 
+        for (Homework hw : agenda) {
+            jsonArray.put(hw.toJson());
+        }
 
+        return jsonArray;
+    }
 }
+
 

@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a Homework having a subject, due date, and a description
-public class Homework {
+public class Homework implements Writable {
     private String subject;
     private String description;
 
@@ -19,5 +22,13 @@ public class Homework {
     // EFFECTS: returns description of homework
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("subject", subject);
+        json.put("description", description);
+        return json;
     }
 }
