@@ -1,0 +1,14 @@
+{"agenda": [
+    {
+        "subject": "cpsc",
+        "description": "project p1"
+    },
+    {
+        "subject": "scie",
+        "description": "essay"
+    },
+    {
+        "subject": "bio",
+        "description": "lab"
+    }
+]}

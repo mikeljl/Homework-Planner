@@ -1,3 +1,5 @@
+// Got most code from https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
 package persistence;
 
 import model.Homework;
@@ -26,15 +28,15 @@ class JsonWriterTest extends JsonTest{
     @Test
     void testWriterEmptyWorkroom() {
         try {
-            HomeworkAgenda wr = new HomeworkAgenda();
+            HomeworkAgenda hwa = new HomeworkAgenda();
             JsonWriter writer = new JsonWriter("./data/testWriterEmptyWorkroom.json");
             writer.open();
-            writer.write(wr);
+            writer.write(hwa);
             writer.close();
 
             JsonReader reader = new JsonReader("./data/testWriterEmptyWorkroom.json");
-            wr = reader.read();
-            assertEquals(0, wr.length());
+            hwa = reader.read();
+            assertEquals(0, hwa.length());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
@@ -43,17 +45,17 @@ class JsonWriterTest extends JsonTest{
     @Test
     void testWriterGeneralWorkroom() {
         try {
-            HomeworkAgenda wr = new HomeworkAgenda();
-            wr.addHomework(new Homework("math", "w1"));
-            wr.addHomework(new Homework("eng", "r1"));
+            HomeworkAgenda hwa = new HomeworkAgenda();
+            hwa.addHomework(new Homework("math", "w1"));
+            hwa.addHomework(new Homework("eng", "r1"));
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralWorkroom.json");
             writer.open();
-            writer.write(wr);
+            writer.write(hwa);
             writer.close();
 
             JsonReader reader = new JsonReader("./data/testWriterGeneralWorkroom.json");
-            wr = reader.read();
-            List<Homework> homeworkAgenda = wr.getAgenda();
+            hwa = reader.read();
+            List<Homework> homeworkAgenda = hwa.getAgenda();
             checkHomework("math", "w1", homeworkAgenda.get(0));
             checkHomework("eng", "r1", homeworkAgenda.get(1));
             assertEquals(2, homeworkAgenda.size());

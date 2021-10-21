@@ -1,3 +1,5 @@
+// Got the last two methods: saveHomeworkAgenda and loadHomeworkAgendacode from https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
 package ui;
 
 // Homework agenda application
@@ -192,7 +194,7 @@ public class AgendaApp {
         }
     }
 
-    // EFFECTS: saves the workroom to file
+    // EFFECTS: saves the homeworkAgenda to file
     private void saveHomeworkAgenda() {
         try {
             jsonWriter.open();
@@ -205,7 +207,7 @@ public class AgendaApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: loads workroom from file
+    // EFFECTS: loads homeworkAgenda from file
     private void loadHomeworkAgenda() {
         try {
             homeworkAgenda = jsonReader.read();

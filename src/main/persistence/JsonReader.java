@@ -1,6 +1,9 @@
+//// Got most code from https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
 package persistence;
 
 import model.Homework;
+
 import model.HomeworkAgenda;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -10,7 +13,7 @@ import java.util.stream.Stream;
 
 import org.json.*;
 
-// Represents a reader that reads workroom from JSON data stored in file
+// Represents a reader that reads HomeworkAgenda from JSON data stored in file
 public class JsonReader {
     private String source;
 
@@ -46,7 +49,7 @@ public class JsonReader {
         return hwa;
     }
 
-    // MODIFIES: wr
+    // MODIFIES: hwa
     // EFFECTS: parses thingies from JSON object and adds them to workroom
     private void addAgenda(HomeworkAgenda hwa, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("agenda");
@@ -56,7 +59,7 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: wr
+    // MODIFIES: hwa
     // EFFECTS: parses thingy from JSON object and adds it to workroom
     private void addHomework(HomeworkAgenda hwa, JSONObject jsonObject) {
         String subject = jsonObject.getString("subject");

@@ -29,3 +29,5 @@ design a homework agenda that will be easy and convenient to use.
 - As a user, I want to be able to see the total number of homework from my agenda
 - As a user, I want to be able to see the homework for a given subject
 - As a user, I want to be able to delete all the homework with a given subject
+- As a user, I want to be able to save my homework agenda to file
+- As a user, I want to be able to be able to load my homework agenda from file 

@@ -1,3 +1,6 @@
+// Got most code from https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
+
 package persistence;
 
 import model.HomeworkAgenda;
@@ -6,7 +9,7 @@ import org.json.JSONObject;
 
 import java.io.*;
 
-// Represents a writer that writes JSON representation of workroom to file
+// Represents a writer that writes JSON representation of HomeworkAgenda to file
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
@@ -43,3 +46,4 @@ public class JsonWriter {
         writer.print(json);
     }
 }
+
