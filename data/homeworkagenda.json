@@ -1,14 +1,10 @@
 {"agenda": [
     {
-        "subject": "math200",
-        "description": "midterm"
+        "subject": "",
+        "description": ""
     },
     {
-        "subject": "cpsc210",
-        "description": "project phase 2"
-    },
-    {
-        "subject": "stat215",
-        "description": "webwork"
+        "subject": "math",
+        "description": "efewf"
     }
 ]}

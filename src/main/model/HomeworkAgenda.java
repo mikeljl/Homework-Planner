@@ -62,9 +62,7 @@ public class HomeworkAgenda implements Writable {
         return agenda;
     }
 
-    public boolean contains(Homework a) {
-        return agenda.contains(a);
-    }
+
 
     @Override
     public JSONObject toJson() {
@@ -73,7 +71,7 @@ public class HomeworkAgenda implements Writable {
         return json;
     }
 
-    // EFFECTS: returns things in this agenda as a JSON array
+    // EFFECTS: returns homework in this agenda as a JSON array
     private JSONArray agendaToJson() {
         JSONArray jsonArray = new JSONArray();
 
