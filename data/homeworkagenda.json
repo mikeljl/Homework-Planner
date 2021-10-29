@@ -1,14 +1,14 @@
 {"agenda": [
     {
-        "subject": "cpsc",
-        "description": "project p1"
+        "subject": "math200",
+        "description": "midterm"
     },
     {
-        "subject": "scie",
-        "description": "essay"
+        "subject": "cpsc210",
+        "description": "project phase 2"
     },
     {
-        "subject": "bio",
-        "description": "lab"
+        "subject": "stat215",
+        "description": "webwork"
     }
 ]}

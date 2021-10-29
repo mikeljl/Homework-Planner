@@ -62,6 +62,10 @@ public class HomeworkAgenda implements Writable {
         return agenda;
     }
 
+    public boolean contains(Homework a) {
+        return agenda.contains(a);
+    }
+
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

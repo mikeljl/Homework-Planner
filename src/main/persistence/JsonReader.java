@@ -22,7 +22,7 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads HomeworkAgenda from file and returns it;
     // throws IOException if an error occurs reading data from file
     public HomeworkAgenda read() throws IOException {
         String jsonData = readFile(source);
@@ -41,16 +41,15 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses HomeworkAgenda from JSON object and returns it
     private HomeworkAgenda parseHomeworkAgenda(JSONObject jsonObject) {
-        //String agenda = jsonObject.getString("name");
         HomeworkAgenda hwa = new HomeworkAgenda();
         addAgenda(hwa, jsonObject);
         return hwa;
     }
 
     // MODIFIES: hwa
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // EFFECTS: parses agenda from JSON object and adds them to HomeworkAgenda
     private void addAgenda(HomeworkAgenda hwa, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("agenda");
         for (Object json : jsonArray) {
@@ -60,7 +59,7 @@ public class JsonReader {
     }
 
     // MODIFIES: hwa
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+    // EFFECTS: parses homework from JSON object and adds it to HomeworkAgenda
     private void addHomework(HomeworkAgenda hwa, JSONObject jsonObject) {
         String subject = jsonObject.getString("subject");
         String description = jsonObject.getString("description");
