@@ -1,10 +1,4 @@
-{"agenda": [
-    {
-        "subject": "",
-        "description": ""
-    },
-    {
-        "subject": "math",
-        "description": "efewf"
-    }
-]}
+{"agenda": [{
+    "subject": "a",
+    "description": "b"
+}]}
