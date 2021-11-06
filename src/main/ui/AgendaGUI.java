@@ -12,10 +12,15 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 /* ListDemo.java requires no other files. */
-public class AgendaGUI extends JPanel
-        implements ListSelectionListener {
+public class AgendaGUI extends JPanel implements ListSelectionListener {
     private final JList list;
     protected final DefaultListModel listModel;
 
@@ -24,16 +29,18 @@ public class AgendaGUI extends JPanel
     protected final JButton deleteButton;
     protected final JTextField homework;
     protected final JTextField subject;
-    protected HomeworkAgenda agenda;
+    protected HomeworkAgenda homeworkAgenda;
+    private JsonWriter jsonWriter = new JsonWriter("./data/homeworkagenda.json");
+    private JsonReader jsonReader = new JsonReader("./data/homeworkagenda.json");
 
-    @SuppressWarnings("checkstyle:MethodLength")
+
     public AgendaGUI() {
         super(new BorderLayout());
-        agenda = new HomeworkAgenda();
+        homeworkAgenda = new HomeworkAgenda();
 
 
         listModel = new DefaultListModel();
-        listModel.addElement("Time to work hard!");
+        //listModel.addElement("Time to work hard!");
 
         //Create the list and put it in a scroll pane.
         list = new JList(listModel);
@@ -43,23 +50,31 @@ public class AgendaGUI extends JPanel
         list.setVisibleRowCount(5);
         JScrollPane listScrollPane = new JScrollPane(list);
 
-        JButton hireButton = new JButton(addHomework);
-        AddListener addListener = new AddListener(hireButton);
-        hireButton.setActionCommand(addHomework);
-        hireButton.addActionListener(addListener);
-        hireButton.setEnabled(false);
+        JButton addButton = new JButton(addHomework);
+        AddListener addListener = new AddListener(addButton);
+        addButton.setActionCommand(addHomework);
+        addButton.addActionListener(addListener);
+        addButton.setEnabled(false);
 
 
         deleteButton = new JButton(deleteHomework);
         deleteButton.setActionCommand(deleteHomework);
         deleteButton.addActionListener(new DeleteListener());
 
+        JButton saveButton = new JButton("save");
+        SaveListener saveListener = new SaveListener(saveButton);
+        saveButton.setActionCommand("save");
+        saveButton.addActionListener(saveListener);
+
+        JButton loadButton = new JButton("load");
+        LoadListener loadListener = new LoadListener(loadButton);
+        loadButton.setActionCommand("load");
+        loadButton.addActionListener(loadListener);
+
         homework = new JTextField();
         homework.setPreferredSize(new Dimension(250, 40));
         homework.addActionListener(addListener);
         homework.getDocument().addDocumentListener(addListener);
-        String name = listModel.getElementAt(
-                list.getSelectedIndex()).toString();
         JLabel label1 = new JLabel("Enter description HERE");
 
         subject = new JTextField();
@@ -71,25 +86,105 @@ public class AgendaGUI extends JPanel
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new GridLayout(5, 1));
         buttonPane.add(deleteButton);
+        buttonPane.add(saveButton);
         buttonPane.add(Box.createHorizontalStrut(10));
         buttonPane.add(Box.createHorizontalStrut(10));
-        buttonPane.add(new JSeparator(SwingConstants.VERTICAL));
         buttonPane.add(subject);
         buttonPane.add(label2);
         buttonPane.add(homework);
         buttonPane.add(label1);
-        buttonPane.add(hireButton);
+        buttonPane.add(addButton);
+        buttonPane.add(loadButton);
         buttonPane.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
+
+
+
+
 
         add(listScrollPane, BorderLayout.CENTER);
         add(buttonPane, BorderLayout.PAGE_END);
+
+
     }
+
+    private static void createAndShowGUI() {
+        //Create and set up the window.
+        JFrame frame = new JFrame("Homework Agenda");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //Create and set up the content pane.
+        JComponent newContentPane = new AgendaGUI();
+        newContentPane.setOpaque(true); //content panes must be opaque
+        frame.setContentPane(newContentPane);
+
+        //Display the window.
+        frame.pack();
+        frame.setVisible(true);
+
+        JMenuBar menuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu("file");
+        menuBar.add(fileMenu);
+
+        JMenuItem saveItem = new JMenuItem("SAVE");
+        JMenuItem loadItem = new JMenuItem("LOAD");
+
+        //saveItem.addActionListener();
+
+
+        fileMenu.add(saveItem);
+        fileMenu.add(loadItem);
+        frame.setJMenuBar(menuBar);
+        frame.setVisible(true);
+    }
+
+    class SaveListener implements ActionListener {
+        private final JButton button;
+
+        public SaveListener(JButton button) {
+            this.button = button;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+
+            try {
+                jsonWriter.open();
+                jsonWriter.write(homeworkAgenda);
+                jsonWriter.close();
+            } catch (FileNotFoundException var2) {
+            }
+        }
+    }
+
+    class LoadListener implements ActionListener {
+        private final JButton button;
+
+        public LoadListener(JButton button) {
+            this.button = button;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+
+
+            try {
+                homeworkAgenda = jsonReader.read();
+
+                for (Homework hw : homeworkAgenda.getAgenda()) {
+                    listModel.addElement("Subject: " + hw.getSubject() + "    Description: "
+                            + hw.getDescription());
+                }
+
+            } catch (IOException var2) {
+            }
+        }
+    }
+
+
+
+
 
     class DeleteListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            //This method can be called only if
-            //there's a valid selection
-            //so go ahead and remove whatever's selected.
+
             int index = list.getSelectedIndex();
             listModel.remove(index);
 
@@ -110,7 +205,6 @@ public class AgendaGUI extends JPanel
         }
     }
 
-    //This listener is shared by the text field and the hire button.
     class AddListener implements ActionListener, DocumentListener {
         private boolean alreadyEnabled = false;
         private final JButton button;
@@ -123,7 +217,7 @@ public class AgendaGUI extends JPanel
         public void actionPerformed(ActionEvent e) {
 
             Homework hw = new Homework(subject.getText(), homework.getText());
-            agenda.addHomework(hw);
+            homeworkAgenda.addHomework(hw);
 
             listModel.addElement("Subject: " + hw.getSubject() + "    Description: "
                     + hw.getDescription());
@@ -179,60 +273,20 @@ public class AgendaGUI extends JPanel
         }
     }
 
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event-dispatching thread.
-     */
-    private static void createAndShowGUI() {
-        //Create and set up the window.
-        JFrame frame = new JFrame("Homework Agenda");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //Create and set up the content pane.
-        JComponent newContentPane = new AgendaGUI();
-        newContentPane.setOpaque(true); //content panes must be opaque
-        frame.setContentPane(newContentPane);
-
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    /*public static void main(String[] args) {
-        //Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
-    }*/
-    class Splash extends JWindow {
-        public Splash() {
-            JWindow j = new JWindow();
-
-            Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-
-            Icon img = new ImageIcon(this.getClass().getResource("download.jpg"));
-            JLabel label = new JLabel(img);
-            label.setSize(200, 300);
-            j.getContentPane().add(label);
-            j.setBounds(((int) d.getWidth() - 722) / 2, ((int) d.getHeight() - 401) / 2, 722, 401);
-            j.setVisible(true);
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            j.setVisible(false);
-
+    private void loadAgenda() {
+        try {
+            this.homeworkAgenda = this.jsonReader.read();
+        } catch (IOException var2) {
         }
+
     }
+
+
 
 
     public static void main(String[] args) {
-        ui.splash s = new ui.splash();
+        Splash s = new Splash();
         createAndShowGUI();
+
     }
 }
