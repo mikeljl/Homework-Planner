@@ -34,6 +34,7 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
     private JsonReader jsonReader = new JsonReader("./data/homeworkagenda.json");
 
 
+    //EFFECT: constructs panels, buttons in gui
     public AgendaGUI() {
         super(new BorderLayout());
         homeworkAgenda = new HomeworkAgenda();
@@ -97,16 +98,12 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
         buttonPane.add(loadButton);
         buttonPane.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
 
-
-
-
-
         add(listScrollPane, BorderLayout.CENTER);
         add(buttonPane, BorderLayout.PAGE_END);
-
-
     }
 
+
+    // EFFECTS: Creates frame
     private static void createAndShowGUI() {
         //Create and set up the window.
         JFrame frame = new JFrame("Homework Agenda");
@@ -128,9 +125,6 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
         JMenuItem saveItem = new JMenuItem("SAVE");
         JMenuItem loadItem = new JMenuItem("LOAD");
 
-        //saveItem.addActionListener();
-
-
         fileMenu.add(saveItem);
         fileMenu.add(loadItem);
         frame.setJMenuBar(menuBar);
@@ -140,10 +134,13 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
     class SaveListener implements ActionListener {
         private final JButton button;
 
+        // EFFECTS: contructs a new SaveListener
         public SaveListener(JButton button) {
             this.button = button;
         }
 
+        //MODIFIES: this
+        //EFFECTS: save current list of homework in homeworkAgenda
         public void actionPerformed(ActionEvent e) {
 
             try {
@@ -158,10 +155,13 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
     class LoadListener implements ActionListener {
         private final JButton button;
 
+        //EFFCTS: contructs a new LoadListener
         public LoadListener(JButton button) {
             this.button = button;
         }
 
+        //MODIFIES: this
+        //EFFECTS: load the saved list of homework in homeworkAgenda to gui
         public void actionPerformed(ActionEvent e) {
 
 
@@ -183,10 +183,14 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
 
 
     class DeleteListener implements ActionListener {
+
+        //MODIFIES: this
+        //EFFECTS: delete selected homework in gui and in homeworkAgenda
         public void actionPerformed(ActionEvent e) {
 
             int index = list.getSelectedIndex();
             listModel.remove(index);
+            homeworkAgenda.getAgenda().remove(index);
 
             int size = listModel.getSize();
 
@@ -209,11 +213,15 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
         private boolean alreadyEnabled = false;
         private final JButton button;
 
+
+        //EFFECTS: constructs a new AddListener
         public AddListener(JButton button) {
             this.button = button;
         }
 
-        //Required by ActionListener.
+
+        //MODIFIES: this
+        //EFFECTS: add the entered homework to gui and to homeworkAgenda
         public void actionPerformed(ActionEvent e) {
 
             Homework hw = new Homework(subject.getText(), homework.getText());
@@ -235,24 +243,26 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
             enableButton();
         }
 
-        //Required by DocumentListener.
+        //EFFECTS: disable add button if the text box is empty
         public void removeUpdate(DocumentEvent e) {
             handleEmptyTextField(e);
         }
 
-        //Required by DocumentListener.
+        //EFFECTS: enable button if the text box is not empty
         public void changedUpdate(DocumentEvent e) {
             if (!handleEmptyTextField(e)) {
                 enableButton();
             }
         }
 
+        //EFFECTS: enable button if enable status is true and it is not enabled yet
         private void enableButton() {
             if (!alreadyEnabled) {
                 button.setEnabled(true);
             }
         }
 
+        //EFFECTS: disable add button if the text box is empty
         private boolean handleEmptyTextField(DocumentEvent e) {
             if (e.getDocument().getLength() <= 0) {
                 button.setEnabled(false);
@@ -263,29 +273,17 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
         }
     }
 
-    //This method is required by ListSelectionListener.
+    //EFFECTS: if no selection, disable delete button, if there is selection, enable the delete button.
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting() == false) {
 
-            //No selection, disable fire button.
-            //Selection, enable the fire button.
             deleteButton.setEnabled(list.getSelectedIndex() != -1);
         }
     }
 
-    private void loadAgenda() {
-        try {
-            this.homeworkAgenda = this.jsonReader.read();
-        } catch (IOException var2) {
-        }
-
-    }
-
-
-
-
+    //EFFECT: initialize gui
     public static void main(String[] args) {
-        Splash s = new Splash();
+        new Splash();
         createAndShowGUI();
 
     }
