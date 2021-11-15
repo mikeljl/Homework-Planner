@@ -32,15 +32,15 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
     protected HomeworkAgenda homeworkAgenda;
     private JsonWriter jsonWriter = new JsonWriter("./data/homeworkagenda.json");
     private JsonReader jsonReader = new JsonReader("./data/homeworkagenda.json");
+    private JPanel buttonPane;
 
 
     //EFFECT: constructs panels, buttons in gui
-    @SuppressWarnings("checkstyle:MethodLength")
+
+    @SuppressWarnings("methodlength")
     public AgendaGUI() {
         super(new BorderLayout());
         homeworkAgenda = new HomeworkAgenda();
-
-
         listModel = new DefaultListModel();
         //listModel.addElement("Time to work hard!");
 
@@ -85,7 +85,7 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
 
 
         //Create a panel that uses BoxLayout.
-        JPanel buttonPane = new JPanel();
+        buttonPane = new JPanel();
         buttonPane.setLayout(new GridLayout(5, 1));
         buttonPane.add(deleteButton);
         buttonPane.add(saveButton);
@@ -149,6 +149,7 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
                 jsonWriter.write(homeworkAgenda);
                 jsonWriter.close();
             } catch (FileNotFoundException var2) {
+                System.out.println("wrong");
             }
         }
     }
@@ -175,6 +176,7 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
                 }
 
             } catch (IOException var2) {
+                System.out.println("wrong");
             }
         }
     }
