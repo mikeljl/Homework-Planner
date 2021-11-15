@@ -35,6 +35,7 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
 
 
     //EFFECT: constructs panels, buttons in gui
+    @SuppressWarnings("checkstyle:MethodLength")
     public AgendaGUI() {
         super(new BorderLayout());
         homeworkAgenda = new HomeworkAgenda();
