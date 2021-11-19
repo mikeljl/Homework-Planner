@@ -1,3 +1,5 @@
+// got part code from https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
+
 package ui;
 
 
@@ -14,12 +16,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
-/* ListDemo.java requires no other files. */
+
 public class AgendaGUI extends JPanel implements ListSelectionListener {
     private final JList list;
     protected final DefaultListModel listModel;
@@ -33,16 +34,15 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
     private JsonWriter jsonWriter = new JsonWriter("./data/homeworkagenda.json");
     private JsonReader jsonReader = new JsonReader("./data/homeworkagenda.json");
     private JPanel buttonPane;
+    private static JFrame frame;
 
 
-    //EFFECT: constructs panels, buttons in gui
-
+    //EFFECT: constructs panels and all buttons
     @SuppressWarnings("methodlength")
     public AgendaGUI() {
         super(new BorderLayout());
         homeworkAgenda = new HomeworkAgenda();
         listModel = new DefaultListModel();
-        //listModel.addElement("Time to work hard!");
 
         //Create the list and put it in a scroll pane.
         list = new JList(listModel);
@@ -104,10 +104,11 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
     }
 
 
-    // EFFECTS: Creates frame
+    // MODIFIES: this
+    // EFFECTS: Creates a frame
     private static void createAndShowGUI() {
         //Create and set up the window.
-        JFrame frame = new JFrame("Homework Agenda");
+        frame = new JFrame("Homework Agenda");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.
@@ -119,7 +120,7 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
         frame.pack();
         frame.setVisible(true);
 
-        JMenuBar menuBar = new JMenuBar();
+        /*JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("file");
         menuBar.add(fileMenu);
 
@@ -128,8 +129,9 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
 
         fileMenu.add(saveItem);
         fileMenu.add(loadItem);
-        frame.setJMenuBar(menuBar);
+        frame.setJMenuBar(menuBar);*/
         frame.setVisible(true);
+
     }
 
     class SaveListener implements ActionListener {
@@ -157,7 +159,7 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
     class LoadListener implements ActionListener {
         private final JButton button;
 
-        //EFFCTS: contructs a new LoadListener
+        //EFFCTS: constructs a new LoadListener
         public LoadListener(JButton button) {
             this.button = button;
         }
@@ -208,8 +210,10 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
 
                 list.setSelectedIndex(index);
                 list.ensureIndexIsVisible(index);
+                list.ensureIndexIsVisible(index);
             }
         }
+
     }
 
     class AddListener implements ActionListener, DocumentListener {
@@ -242,10 +246,14 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
         }
 
         //Required by DocumentListener.
+
+        //MODIFIES: this
+        //EFFECTS: enable button
         public void insertUpdate(DocumentEvent e) {
             enableButton();
         }
 
+        //MODIFIES: this
         //EFFECTS: disable add button if the text box is empty
         public void removeUpdate(DocumentEvent e) {
             handleEmptyTextField(e);
@@ -258,6 +266,7 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
             }
         }
 
+        //MODIFIES: this
         //EFFECTS: enable button if enable status is true and it is not enabled yet
         private void enableButton() {
             if (!alreadyEnabled) {
@@ -265,6 +274,7 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
             }
         }
 
+        // MODIFIES: this
         //EFFECTS: disable add button if the text box is empty
         private boolean handleEmptyTextField(DocumentEvent e) {
             if (e.getDocument().getLength() <= 0) {
@@ -276,6 +286,7 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
         }
     }
 
+    //MODIFIES: this
     //EFFECTS: if no selection, disable delete button, if there is selection, enable the delete button.
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting() == false) {
@@ -284,7 +295,7 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
         }
     }
 
-    //EFFECT: initialize gui
+    //EFFECT: initialize gui with splash screen
     public static void main(String[] args) {
         new Splash();
         createAndShowGUI();

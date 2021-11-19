@@ -1,3 +1,5 @@
+// got part of code from https://stackoverflow.com/questions/16134549/how-to-make-a-splash-screen-for-gui
+
 package ui;
 
 import javax.swing.*;
@@ -10,11 +12,10 @@ public class Splash extends JWindow {
 
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 
-        Icon img = new ImageIcon(this.getClass().getResource("download.jpg"));
+        Icon img = new ImageIcon(this.getClass().getResource("meeting-agenda.jpeg"));
         JLabel label = new JLabel(img);
-        label.setSize(200, 300);
         j.getContentPane().add(label);
-        j.setBounds(((int) d.getWidth() - 722) / 2, ((int) d.getHeight() - 401) / 2, 722, 401);
+        j.setBounds(((int) d.getWidth() - 1280) / 2, ((int) d.getHeight() - 904) / 2, 1280, 904);
         j.setVisible(true);
         try {
             Thread.sleep(3000);
