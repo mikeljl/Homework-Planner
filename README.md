@@ -54,5 +54,10 @@ Fri Nov 19 16:44:20 PST 2021
 The homework: CPSC  Lecture ticket is deleted 
 
 ## Task 4, Question 3
+Future Improvements:
+1. instead of putting the save/load button in panel, I can make a menu bar called "file"
+that allows users to save and load data, so the panel looks cleaner.
+2. make helper methods in AgendaGUI for making buttons and adding button to panel to increase
+readability.
 UML:
 ![UML](UML_Design_Diagram.jpg)
