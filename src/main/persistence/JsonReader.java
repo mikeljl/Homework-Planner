@@ -2,6 +2,8 @@
 
 package persistence;
 
+import model.Event;
+import model.EventLog;
 import model.Homework;
 
 import model.HomeworkAgenda;

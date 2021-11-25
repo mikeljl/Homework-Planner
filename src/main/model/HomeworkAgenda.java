@@ -22,6 +22,8 @@ public class HomeworkAgenda implements Writable {
     //EFFECT: add the given homework to agenda
     public void addHomework(Homework hw) {
         agenda.add(hw);
+        EventLog.getInstance().logEvent(new Event("The homework: " + hw.getSubject() + " "
+                + hw.getDescription() + " is added "));
     }
 
     //REQUIRES: Homework hw is already in HomeworkAgenda
@@ -29,6 +31,8 @@ public class HomeworkAgenda implements Writable {
     //EFFECTS: remove the given homework from agenda
     public void deleteHomework(Homework hw) {
         agenda.remove(hw);
+        EventLog.getInstance().logEvent(new Event("The homework: " + hw.getSubject() + " "
+                + hw.getDescription() + " is deleted "));
     }
 
     //REQUIRES: HomeworkAgenda must have a homework with subject
@@ -45,6 +49,7 @@ public class HomeworkAgenda implements Writable {
         }
 
         agenda.removeAll(needToBeDeleted.agenda);
+
     }
 
     //EFFECTS: returns the number of Homework currently in agenda

@@ -31,3 +31,28 @@ design a homework agenda that will be easy and convenient to use.
 - As a user, I want to be able to delete all the homework with a given subject
 - As a user, I want to be able to save my homework agenda to file
 - As a user, I want to be able to be able to load my homework agenda from file 
+
+## Task 4, Question 2
+
+Fri Nov 19 16:43:19 PST 2021
+The homework: Math Assignment1 is added  
+Fri Nov 19 16:43:24 PST 2021
+The homework: CPSC Phase3 is added  
+Fri Nov 19 16:43:36 PST 2021
+The homework: CPSC  Lecture ticket is added  
+Fri Nov 19 16:43:42 PST 2021
+The homework: English Reading2 is added  
+Fri Nov 19 16:43:59 PST 2021
+The homework: Statistics Assignment3 is added  
+Fri Nov 19 16:44:02 PST 2021
+The homework: CPSC Phase3 is deleted  
+Fri Nov 19 16:44:04 PST 2021
+The homework: Statistics Assignment3 is deleted  
+Fri Nov 19 16:44:13 PST 2021
+The homework: CPSC Phase4 is added  
+Fri Nov 19 16:44:20 PST 2021
+The homework: CPSC  Lecture ticket is deleted 
+
+## Task 4, Question 3
+UML:
+![UML](UML_Design_Diagram.jpg)

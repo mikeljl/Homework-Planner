@@ -3,6 +3,8 @@
 package ui;
 
 
+import model.Event;
+import model.EventLog;
 import model.Homework;
 import model.HomeworkAgenda;
 
@@ -16,6 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Iterator;
 
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -27,6 +30,7 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
 
     private static final String addHomework = "Add Homework";
     private static final String deleteHomework = "Delete Homework";
+    private static final String clearHomework = "Clear Homework";
     protected final JButton deleteButton;
     protected final JTextField homework;
     protected final JTextField subject;
@@ -63,6 +67,8 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
         deleteButton.setActionCommand(deleteHomework);
         deleteButton.addActionListener(new DeleteListener());
 
+
+
         JButton saveButton = new JButton("save");
         SaveListener saveListener = new SaveListener(saveButton);
         saveButton.setActionCommand("save");
@@ -87,15 +93,13 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
         //Create a panel that uses BoxLayout.
         buttonPane = new JPanel();
         buttonPane.setLayout(new GridLayout(5, 1));
-        buttonPane.add(deleteButton);
-        buttonPane.add(saveButton);
-        buttonPane.add(Box.createHorizontalStrut(10));
-        buttonPane.add(Box.createHorizontalStrut(10));
         buttonPane.add(subject);
         buttonPane.add(label2);
         buttonPane.add(homework);
         buttonPane.add(label1);
         buttonPane.add(addButton);
+        buttonPane.add(deleteButton);
+        buttonPane.add(saveButton);
         buttonPane.add(loadButton);
         buttonPane.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
 
@@ -111,6 +115,20 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
         frame = new JFrame("Homework Agenda");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+
+                Iterator<Event> iterator = EventLog.getInstance().iterator();
+
+                while (iterator.hasNext()) {
+                    System.out.println(iterator.next() + " ");
+                }
+                //THEN you can exit the program
+                System.exit(0);
+            }
+        });
+
         //Create and set up the content pane.
         JComponent newContentPane = new AgendaGUI();
         newContentPane.setOpaque(true); //content panes must be opaque
@@ -119,20 +137,11 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
         //Display the window.
         frame.pack();
         frame.setVisible(true);
-
-        /*JMenuBar menuBar = new JMenuBar();
-        JMenu fileMenu = new JMenu("file");
-        menuBar.add(fileMenu);
-
-        JMenuItem saveItem = new JMenuItem("SAVE");
-        JMenuItem loadItem = new JMenuItem("LOAD");
-
-        fileMenu.add(saveItem);
-        fileMenu.add(loadItem);
-        frame.setJMenuBar(menuBar);*/
         frame.setVisible(true);
 
     }
+
+
 
     class SaveListener implements ActionListener {
         private final JButton button;
@@ -195,7 +204,9 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
 
             int index = list.getSelectedIndex();
             listModel.remove(index);
-            homeworkAgenda.getAgenda().remove(index);
+
+            Homework hw = homeworkAgenda.getAgenda().get(index);
+            homeworkAgenda.deleteHomework(hw);
 
             int size = listModel.getSize();
 
