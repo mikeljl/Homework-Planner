@@ -35,8 +35,8 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
     protected final JTextField homework;
     protected final JTextField subject;
     protected HomeworkAgenda homeworkAgenda;
-    private JsonWriter jsonWriter = new JsonWriter("./data/homeworkagenda.json");
-    private JsonReader jsonReader = new JsonReader("./data/homeworkagenda.json");
+    private JsonWriter jsonWriter; //= new JsonWriter("./data/homeworkagenda.json");
+    private JsonReader jsonReader; //= new JsonReader("./data/homeworkagenda.json");
     private JPanel buttonPane;
     private static JFrame frame;
 
@@ -45,6 +45,8 @@ public class AgendaGUI extends JPanel implements ListSelectionListener {
     @SuppressWarnings("methodlength")
     public AgendaGUI() {
         super(new BorderLayout());
+        jsonWriter = new JsonWriter("./data/homeworkagenda.json");
+        jsonReader = new JsonReader("./data/homeworkagenda.json");
         homeworkAgenda = new HomeworkAgenda();
         listModel = new DefaultListModel();
 

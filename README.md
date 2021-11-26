@@ -32,7 +32,7 @@ design a homework agenda that will be easy and convenient to use.
 - As a user, I want to be able to save my homework agenda to file
 - As a user, I want to be able to be able to load my homework agenda from file 
 
-## Task 4, Question 2
+## Phase 4, Task 2
 
 Fri Nov 19 16:43:19 PST 2021
 The homework: Math Assignment1 is added  
@@ -53,7 +53,7 @@ The homework: CPSC Phase4 is added
 Fri Nov 19 16:44:20 PST 2021
 The homework: CPSC  Lecture ticket is deleted 
 
-## Task 4, Question 3
+## Phase 4, Task 3
 Future Improvements:
 1. instead of putting the save/load button in panel, I can make a menu bar called "file"
 that allows users to save and load data, so the panel looks cleaner.
