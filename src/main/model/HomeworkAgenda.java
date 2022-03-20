@@ -4,8 +4,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 // Represents an agenda of homework
@@ -16,6 +16,8 @@ public class HomeworkAgenda implements Writable {
     //EFFECT: Constructs an empty agenda
     public HomeworkAgenda() {
         agenda = new ArrayList<>();
+
+
     }
 
     //MODIFIES: this
