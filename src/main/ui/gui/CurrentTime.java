@@ -22,5 +22,4 @@ public class CurrentTime {
         label.setForeground(new Color(255, 255, 255));
         HomePageFrame.centerInScreen(frame);
     }
-
 }

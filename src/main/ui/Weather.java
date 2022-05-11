@@ -1,6 +1,5 @@
 package ui;
 
-
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.net.MalformedURLException;
@@ -16,9 +15,6 @@ import com.google.gson.reflect.*;
 
 
 public class Weather {
-
-
-
 
     private Map<String, Object> restMap;
     private Map<String, Object> mainMap;
@@ -36,7 +32,6 @@ public class Weather {
         this.location = location;
         weatherData(location);
     }
-
 
     public static Map<String, Object> jsonToMap(String str) {
         Map<String, Object> map = new Gson().fromJson(

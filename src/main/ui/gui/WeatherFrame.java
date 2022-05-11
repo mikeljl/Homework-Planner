@@ -58,9 +58,7 @@ public class WeatherFrame extends JFrame {
         information.setBackground(new Color(150, 173, 255));
 
         information.setText(description + "\n" + temp + "\n" + feel + "\n" + min + "\n" + max + "\n" + hum);
-
     }
-
 
     private void setIcon() {
         URL url = null;

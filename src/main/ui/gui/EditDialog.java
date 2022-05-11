@@ -18,7 +18,5 @@ public class EditDialog extends AddDialog {
         this.setVisible(true);
 
         return accepted;
-
     }
-
 }

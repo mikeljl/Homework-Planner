@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 
 public class InfoDialog extends JDialog {
 
-
     private JPanel root;
     private JPanel buttonPanel;
     private JPanel messagePanel;
@@ -17,7 +16,6 @@ public class InfoDialog extends JDialog {
     public InfoDialog(Window owner) {
         super(owner);
 
-
         root = new JPanel(new BorderLayout());
         this.setContentPane(root);
         buttonPanel = new JPanel();
@@ -26,17 +24,14 @@ public class InfoDialog extends JDialog {
         message = new JLabel();
         messagePanel.add(message);
 
-
         okButton = new JButton("Ok");
         okButton.addActionListener(new OkListener());
         buttonPanel.add(okButton);
-
 
         root.add(messagePanel, BorderLayout.CENTER);
         root.add(buttonPanel, BorderLayout.PAGE_END);
 
         setUp();
-
     }
 
 
@@ -45,7 +40,6 @@ public class InfoDialog extends JDialog {
         this.setModal(true);
         this.setSize(300, 100);
         relocate();
-
     }
 
     protected void relocate() {
@@ -67,10 +61,8 @@ public class InfoDialog extends JDialog {
         @Override
         public void actionPerformed(ActionEvent e) {
             setVisible(false);
-
         }
     }
-
 }
 
 

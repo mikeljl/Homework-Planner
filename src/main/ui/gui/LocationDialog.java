@@ -32,7 +32,6 @@ public class LocationDialog extends JDialog {
         inputPanel.add(locationLabel);
         inputPanel.add(locationInput);
 
-
         checkButton = new JButton("Check");
         cancelButton = new JButton("Cancel");
         checkButton.addActionListener(new CheckListener());
@@ -42,7 +41,6 @@ public class LocationDialog extends JDialog {
 
         root.add(inputPanel, BorderLayout.CENTER);
         root.add(buttonPanel, BorderLayout.PAGE_END);
-
 
         accepted = false;
     }
@@ -55,7 +53,6 @@ public class LocationDialog extends JDialog {
         this.setVisible(true);
 
         return accepted;
-
     }
 
     protected void relocate() {
@@ -72,7 +69,6 @@ public class LocationDialog extends JDialog {
         public void actionPerformed(ActionEvent e) {
             accepted = true;
             setVisible(false);
-
         }
     }
 
@@ -88,5 +84,4 @@ public class LocationDialog extends JDialog {
         String location = locationInput.getText();
         return location;
     }
-
 }

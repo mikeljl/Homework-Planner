@@ -22,6 +22,5 @@ public class SplashScreen extends JWindow {
             e.printStackTrace();
         }
         j.setVisible(false);
-
     }
 }

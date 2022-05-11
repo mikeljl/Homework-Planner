@@ -1,17 +1,13 @@
 #Description of My Project
-## A Homework Agenda
+## A Homework Planner
 
-**Features of the homework agenda:**
+**Features of the homework planner:**
 - Students can include 
   the description of their homework and the subject of the homework in this homework agenda
 - Add, delete, and edit existing homework in agenda
 - save and load agenda
 - check current time
 - check weather of any city
-  
-Students can use this agenda to keep track of their homework.
-
-
 
 Example of Event logging:
 

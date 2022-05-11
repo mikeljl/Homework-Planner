@@ -37,7 +37,6 @@ public class AddDialog extends JDialog {
         inputPanel.add(descriptionLabel);
         inputPanel.add(descriptionInput);
 
-
         addButton = new JButton("Add");
         cancelButton = new JButton("Cancel");
         addButton.addActionListener(new AddListener());
@@ -47,7 +46,6 @@ public class AddDialog extends JDialog {
 
         root.add(inputPanel, BorderLayout.CENTER);
         root.add(buttonPanel, BorderLayout.PAGE_END);
-
 
         accepted = false;
     }
@@ -70,7 +68,6 @@ public class AddDialog extends JDialog {
         this.setVisible(true);
 
         return accepted;
-
     }
 
     protected void relocate() {
@@ -87,7 +84,6 @@ public class AddDialog extends JDialog {
         public void actionPerformed(ActionEvent e) {
             accepted = true;
             setVisible(false);
-
         }
     }
 
@@ -96,7 +92,6 @@ public class AddDialog extends JDialog {
         public void actionPerformed(ActionEvent e) {
             accepted = false;
             setVisible(false);
-
         }
     }
 }

@@ -1,5 +1,3 @@
-// Got the last two methods: saveHomeworkAgenda and loadHomeworkAgendacode from https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
-
 package ui;
 
 // Homework agenda application

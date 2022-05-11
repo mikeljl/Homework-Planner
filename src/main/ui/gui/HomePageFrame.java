@@ -36,7 +36,6 @@ public class HomePageFrame extends JFrame {
     private JsonReader jsonReader;
     private Border buttonBorder;
 
-
     public HomePageFrame(String title) {
         super(title);
         hwAgenda = new HomeworkAgenda();
@@ -58,7 +57,6 @@ public class HomePageFrame extends JFrame {
         addPictureToButton("image/cloudy.png", weatherButton);
         addButtonToPanel();
         addPanelsToFrame();
-
     }
 
     private void setUpAgendaList() {
@@ -108,7 +106,6 @@ public class HomePageFrame extends JFrame {
         editButton.setBorder(buttonBorder);
     }
 
-
     private void createMenuBar() {
         menuBar = new JMenuBar();
         file = new JMenu("File");
@@ -131,7 +128,6 @@ public class HomePageFrame extends JFrame {
         save.addActionListener(new SaveListener());
         load.addActionListener(new LoadListener());
     }
-
 
     // MODIFIES: this
     // EFFECTS: makes a button according to parameter specification
