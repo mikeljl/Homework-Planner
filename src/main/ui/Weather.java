@@ -10,16 +10,12 @@ import java.util.HashMap;
 import java.io.InputStreamReader;
 import java.net.URLConnection;
 import com.google.gson.*;
-import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.*;
-
 
 public class Weather {
 
-    private Map<String, Object> restMap;
-    private Map<String, Object> mainMap;
-    private Map<String, Object> windMap;
     private String location;
+    private String speed;
     private String description;
     private double temperature;
     private double feelsLike;
@@ -41,6 +37,7 @@ public class Weather {
         return map;
     }
 
+    @SuppressWarnings("methodlength")
     public void weatherData(String location) {
         String apiKey = "c0b51f45a5591d2c733eec10c78b6cba";
         this.location = location;
@@ -56,15 +53,9 @@ public class Weather {
                 result.append(line);
             }
             rd.close();
-
-            Map<String, Object> restMap = jsonToMap(result.toString());
-            Map<String, Object> mainMap = jsonToMap(restMap.get("main").toString());
-            ArrayList list = (ArrayList) restMap.get("weather");
-            LinkedTreeMap<String, Object> a = (LinkedTreeMap<String, Object>) list.get(0);
-
-            setUpField(mainMap, a);
+            Map<String, Object> infoMap = jsonToMap(result.toString());
+            getInfo(infoMap);
             printInfo();
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -72,14 +63,18 @@ public class Weather {
         }
     }
 
-    private void setUpField(Map<String, Object> mainMap, LinkedTreeMap<String, Object> a) {
-        this.description = (String) a.get("description");
+    private void getInfo(Map<String, Object> infoMap) {
+        Map<String, Object> mainMap = jsonToMap(infoMap.get("main").toString());
+        ArrayList<Map<String, Object>> weathers = (ArrayList<Map<String, Object>>) infoMap.get("weather");
+        Map<String, Object> weatherMap = weathers.get(0);
+
+        this.description = (String) weatherMap.get("description");
         this.temperature = (double) mainMap.get("temp");
         this.feelsLike = (double) mainMap.get("feels_like");
         this.tempMax = (double) mainMap.get("temp_max");
         this.tempMin = (double) mainMap.get("temp_min");
         this.humidity = (double) mainMap.get("humidity");
-        this.iconCode = (String) a.get("icon");
+        this.iconCode = (String) weatherMap.get("icon");
     }
 
     private void printInfo() {
@@ -90,7 +85,6 @@ public class Weather {
         System.out.println(" Lowest Temperature Today: " + this.tempMin);
         System.out.println(" Humidity: " + this.humidity + "%");
     }
-
 
     public String getDescription() {
         return description;
